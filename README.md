@@ -12,11 +12,13 @@ curl -fsSL https://raw.githubusercontent.com/steve109292-max/babson-companion-do
 
 The public download entry detects Apple Silicon or Intel, checks a pinned SHA-256 checksum, installs a bundled Node runtime without sudo or Homebrew, and opens the interactive setup wizard. No GitHub account or Google Cloud project is required.
 
-The wizard covers data consent, your own Claude or ChatGPT login, browser preparation, Google Calendar authorization, Canvas/Workday/Belong login, and an extraction check. Browser authorization and school MFA still require the account owner. Re-running the command reopens setup and preserves saved preferences and Google authorization. On the installed app, `~/.local/bin/babson setup` also reopens it.
+The wizard starts with data consent and Microsoft school login. Choose manual login or authorize creation of a local software passkey; optionally save a password backup in macOS Keychain (default: no). It then connects your own Claude or ChatGPT, Google Calendar, Canvas/Workday/Belong, and checks extraction. Browser authorization and school MFA still require the account owner. Re-running the command reopens setup and preserves saved preferences and Google authorization. On the installed app, `~/.local/bin/babson setup` also reopens it.
 
 **This is a setup preview, not a complete live calendar service.** Automatic synchronization remains disabled. Full school-source integration, class exceptions, unstarred joined-group events, and complete fresh-user acceptance are still pending. Do not describe the preview as ready for daily student use.
 
 The installer contains shared native Google application metadata; it does not contain the publisher's Google user token, school browser session, password or passkey.
+
+The prep.4 login flow has passed a real Microsoft passkey registration and fresh-cookie sign-in test. Password and passkey material stay in non-synchronizable macOS login-Keychain items; this is software credential storage, not a hardware authenticator. `babson forget-password` removes the app’s saved password and `babson disable-auto-login` disables automatic school login.
 
 ## Validation
 

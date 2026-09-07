@@ -11,16 +11,16 @@ main() {
   fi
   local arch expected file actual
   case "$(/usr/bin/uname -m)" in
-    arm64) arch=arm64; expected=2045d3ac00697059ccde0a3b76a29dce941a3b0d7358cfd8d5afbffbdbaab580 ;;
-    x86_64) arch=x64; expected=373843d46476f2ea13668df97829d39dedcf2e488c03df85e730f9671b9383c9 ;;
+    arm64) arch=arm64; expected=43236bcfd3c2b27a8cf6b4ac1222fa41f280f141329b33be74d64ad4853c7da1 ;;
+    x86_64) arch=x64; expected=9515a5e49df9922bba5ec039d3dc2379c2ff6fb2262e80e6b64aaa32be499dbb ;;
     *) echo '不支援的 Mac 架構。' >&2; return 1 ;;
   esac
   echo 'Babson Calendar Companion — 開發預覽設定入口'
-  echo '下載後會開始 AI、Google Calendar 與校務登入設定；自動同步尚未開放。'
+  echo '下載後會先設定 Microsoft 校務登入，再連接 AI 與 Google Calendar；自動同步尚未開放。'
   BABSON_DOWNLOAD_TMP="$(/usr/bin/mktemp -d "${TMPDIR:-/tmp}/babson-download.XXXXXX")"
   trap '/bin/rm -rf -- "$BABSON_DOWNLOAD_TMP"' EXIT
   file="$BABSON_DOWNLOAD_TMP/install.command"
-  /usr/bin/curl --proto '=https' --tlsv1.2 --fail --location --retry 2 --connect-timeout 20 --max-time 600 --progress-bar "https://github.com/steve109292-max/babson-companion-downloads/releases/download/v0.1.0-prep.3/babson-companion-0.1.0-prep.3-macos-$arch.command" --output "$file"
+  /usr/bin/curl --proto '=https' --tlsv1.2 --fail --location --retry 2 --connect-timeout 20 --max-time 600 --progress-bar "https://github.com/steve109292-max/babson-companion-downloads/releases/download/v0.1.0-prep.4/babson-companion-0.1.0-prep.4-macos-$arch.command" --output "$file"
   actual="$(/usr/bin/shasum -a 256 "$file" | /usr/bin/awk '{print $1}')"
   [[ "$actual" == "$expected" ]] || { echo '安裝檔驗證失敗，未執行安裝。' >&2; return 1; }
   /bin/bash "$file" < /dev/tty
