@@ -11,8 +11,8 @@ main() {
   fi
   local arch expected file actual
   case "$(/usr/bin/uname -m)" in
-    arm64) arch=arm64; expected=a496966779058c37104a490cc7df3b00588e930cbf1c21b284b10f3838cc4a0a ;;
-    x86_64) arch=x64; expected=16a4127202388b0a14b477d2bced972047fb439a1b8483982ca4fd7475550324 ;;
+    arm64) arch=arm64; expected=cfb2c07a932019de6aceb0a4794649fa4bcda5eb34b9c244a1c24f426494461e ;;
+    x86_64) arch=x64; expected=c92b1877d776dc62a391ab2d02bb152f603beaed5e65bcb996b8715aeb042b73 ;;
     *) echo 'Unsupported Mac architecture.' >&2; return 1 ;;
   esac
   echo 'Babson Calendar Companion — Development preview setup'
@@ -20,7 +20,7 @@ main() {
   BABSON_DOWNLOAD_TMP="$(/usr/bin/mktemp -d "${TMPDIR:-/tmp}/babson-download.XXXXXX")"
   trap '/bin/rm -rf -- "$BABSON_DOWNLOAD_TMP"' EXIT
   file="$BABSON_DOWNLOAD_TMP/install.command"
-  /usr/bin/curl --proto '=https' --tlsv1.2 --fail --location --retry 2 --connect-timeout 20 --max-time 600 --progress-bar "https://github.com/steve109292-max/babson-companion-downloads/releases/download/v0.1.0-prep.8/babson-companion-0.1.0-prep.8-macos-$arch.command" --output "$file"
+  /usr/bin/curl --proto '=https' --tlsv1.2 --fail --location --retry 2 --connect-timeout 20 --max-time 600 --progress-bar "https://github.com/steve109292-max/babson-companion-downloads/releases/download/v0.1.0-prep.9/babson-companion-0.1.0-prep.9-macos-$arch.command" --output "$file"
   actual="$(/usr/bin/shasum -a 256 "$file" | /usr/bin/awk '{print $1}')"
   [[ "$actual" == "$expected" ]] || { echo 'Installer verification failed. Installation was not started.' >&2; return 1; }
   /bin/bash "$file" < /dev/tty
