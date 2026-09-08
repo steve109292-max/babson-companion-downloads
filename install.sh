@@ -11,8 +11,8 @@ main() {
   fi
   local arch expected file actual
   case "$(/usr/bin/uname -m)" in
-    arm64) arch=arm64; expected=37f5c3648db8a89e42ea5fef885bbdbeceed1c76607f906b97544e5968c35e7f ;;
-    x86_64) arch=x64; expected=eafe6565b1acc66398b50a28ee29c9c2cd40b101dd6afdfc0f1f756140a7994b ;;
+    arm64) arch=arm64; expected=3d51c7a1018c0bad6bbfa920a91bccac727397e8b36ae107ac859b05ad1b8b42 ;;
+    x86_64) arch=x64; expected=8522f83883b4065c4513bce35d28bd8534ac932a5142d30390c0714d99eb572b ;;
     *) echo 'Unsupported Mac architecture.' >&2; return 1 ;;
   esac
   echo 'Babson Calendar Companion — Development preview setup'
