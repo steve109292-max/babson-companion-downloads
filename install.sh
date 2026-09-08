@@ -11,16 +11,16 @@ main() {
   fi
   local arch expected file actual
   case "$(/usr/bin/uname -m)" in
-    arm64) arch=arm64; expected=c69a6a347de007aa54ce007dd5e46b220cc461894cf17d7cc44b30b1c51c1f66 ;;
-    x86_64) arch=x64; expected=34cd49e9855191630ee8fdd4295a711f5aa5d66952d2cc5b86bdd163402eb063 ;;
+    arm64) arch=arm64; expected=0d50e6d2f192ba0fa1bd68f7babcd5558a57cc308dbec25983bd37ef4049f122 ;;
+    x86_64) arch=x64; expected=d6ed6f9c1d3568a145ae2718cea52c61c012a86eb8cde0a9930b891f014c728b ;;
     *) echo 'Unsupported Mac architecture.' >&2; return 1 ;;
   esac
   echo 'Babson Calendar Companion — Development preview setup'
-  echo 'Setup starts with Microsoft school login, then connects AI and Google Calendar. Automatic sync is not enabled yet.'
+  echo 'Find homework in Canvas Modules, pages and slides. Local text/OCR, cached AI analysis. Google Calendar is optional; automatic sync is not enabled.'
   BABSON_DOWNLOAD_TMP="$(/usr/bin/mktemp -d "${TMPDIR:-/tmp}/babson-download.XXXXXX")"
   trap '/bin/rm -rf -- "$BABSON_DOWNLOAD_TMP"' EXIT
   file="$BABSON_DOWNLOAD_TMP/install.command"
-  /usr/bin/curl --proto '=https' --tlsv1.2 --fail --location --retry 2 --connect-timeout 20 --max-time 600 --progress-bar "https://github.com/steve109292-max/babson-companion-downloads/releases/download/v0.1.0-prep.6/babson-companion-0.1.0-prep.6-macos-$arch.command" --output "$file"
+  /usr/bin/curl --proto '=https' --tlsv1.2 --fail --location --retry 2 --connect-timeout 20 --max-time 600 --progress-bar "https://github.com/steve109292-max/babson-companion-downloads/releases/download/v0.1.0-prep.7/babson-companion-0.1.0-prep.7-macos-$arch.command" --output "$file"
   actual="$(/usr/bin/shasum -a 256 "$file" | /usr/bin/awk '{print $1}')"
   [[ "$actual" == "$expected" ]] || { echo 'Installer verification failed. Installation was not started.' >&2; return 1; }
   /bin/bash "$file" < /dev/tty
